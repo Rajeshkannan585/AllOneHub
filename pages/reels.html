@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/reels.css">
+</head>
+<body>
+<div id="reels" class="reels-container"></div>
+
+<script type="module">
+import { loadReels, enableAutoplay } from "../js/reels-feed.js";
+import { trackView } from "../js/reel-actions.js";
+import { requireAuth } from "../js/guards.js";
+
+requireAuth();
+
+const root = document.getElementById("reels");
+const reels = await loadReels();
+
+root.innerHTML = reels.map(r => `
+<section class="reel">
+  <video muted controls playsinline data-id="${r.id}" src="${r.videoUrl}"></video>
+  <div class="overlay">
+    <p>${r.caption || ""}</p>
+    <small>❤️ ${r.likesCount || 0} · 👁️ ${r.viewsCount || 0}</small>
+  </div>
+</section>
+`).join("");
+
+enableAutoplay();
+
+document.querySelectorAll("video").forEach(v => {
+  v.addEventListener("play", () => trackView(v.dataset.id));
+});
+</script>
+</body>
+</html>

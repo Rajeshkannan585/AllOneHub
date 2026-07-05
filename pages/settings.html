@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+<div class="settings-container">
+  <h1>Settings</h1>
+
+  <label>
+    <input id="darkMode" type="checkbox">
+    Dark Mode
+  </label>
+
+  <label>
+    <input id="privateAccount" type="checkbox">
+    Private Account
+  </label>
+
+  <select id="language">
+    <option value="en">English</option>
+    <option value="ta">தமிழ்</option>
+    <option value="hi">Hindi</option>
+  </select>
+
+  <input id="newPassword" type="password" placeholder="New password">
+
+  <button id="saveBtn">Save Settings</button>
+  <button id="deleteBtn" class="danger">Delete Account</button>
+</div>
+
+<script type="module">
+import { savePreferences, changePassword, deleteAccount }
+from "../js/settings.js";
+
+import { handleError } from "../js/error-handler.js";
+import { setLoading } from "../js/loading.js";
+
+saveBtn.onclick = async () => {
+ try{
+  setLoading(saveBtn, true);
+
+  await savePreferences({
+    darkMode: darkMode.checked,
+    privateAccount: privateAccount.checked,
+    language: language.value
+  });
+
+  if(newPassword.value){
+    await changePassword(newPassword.value);
+  }
+
+ }catch(error){
+  handleError(error);
+ }finally{
+  setLoading(saveBtn, false);
+ }
+};
+
+deleteBtn.onclick = async () => {
+ if(confirm("Delete account permanently?")){
+   await deleteAccount();
+   location.href = "signup.html";
+ }
+};
+</script>
+</body>
+</html>

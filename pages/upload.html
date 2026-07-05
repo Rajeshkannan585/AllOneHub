@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/feed.css">
+</head>
+<body>
+<h2>Create Post</h2>
+
+<input id="file" type="file" accept="image/*,video/*">
+<textarea id="caption" placeholder="What's happening?"></textarea>
+<button id="publish">Publish</button>
+
+<script type="module">
+import { publishPost } from "../js/upload.js";
+
+publish.onclick = async () => {
+  const media = file.files[0];
+  await publishPost(media, caption.value);
+  location.href = "dashboard.html";
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/feed.css">
+</head>
+<body>
+<header><h1>AllOneHub Feed</h1></header>
+
+<main id="feed"></main>
+
+<div id="loader">Loading...</div>
+
+<script type="module">
+import { loadFeed, renderPosts } from "../js/feed.js";
+import { requireAuth } from "../js/guards.js";
+
+requireAuth();
+
+const feed = document.getElementById("feed");
+const loader = document.getElementById("loader");
+
+async function fetchMore(){
+  loader.style.display = "block";
+  const posts = await loadFeed();
+  renderPosts(posts, feed);
+  loader.style.display = "none";
+}
+
+await fetchMore();
+
+window.addEventListener("scroll", async () => {
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 300){
+    await fetchMore();
+  }
+});
+</script>
+</body>
+</html>

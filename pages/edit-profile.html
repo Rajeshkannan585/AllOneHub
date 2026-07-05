@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="../css/profile.css"></head>
+<body>
+<h1>Edit Profile</h1>
+
+<input id="displayName" placeholder="Display name">
+<textarea id="bio" placeholder="Bio"></textarea>
+<input id="website" placeholder="Website">
+
+<button id="saveBtn">Save</button>
+
+<script type="module">
+import { updateProfileData } from "../js/profile.js";
+import { handleError } from "../js/error-handler.js";
+
+saveBtn.onclick = async () => {
+ try{
+  await updateProfileData({
+    username: displayName.value,
+    bio: bio.value,
+    website: website.value
+  });
+  location.href = "profile.html";
+ }catch(error){
+  handleError(error);
+ }
+};
+</script>
+</body>
+</html>

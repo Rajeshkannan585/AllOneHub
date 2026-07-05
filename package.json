@@ -1,0 +1,12 @@
+{
+  "name": "allonehub",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "firebase emulators:start",
+    "deploy": "firebase deploy",
+    "lint": "echo 'add eslint'",
+    "test": "jest",
+    "test:e2e": "playwright test"
+  }
+}

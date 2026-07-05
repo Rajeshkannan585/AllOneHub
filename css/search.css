@@ -1,0 +1,38 @@
+body{
+  background:#0f172a;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  margin:0;
+  padding:24px;
+}
+
+.search-container{
+  max-width:720px;
+  margin:auto;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  margin-bottom:20px;
+}
+
+.result-card{
+  display:flex;
+  gap:16px;
+  padding:16px;
+  background:#1f2937;
+  border-radius:14px;
+  margin-bottom:12px;
+  color:#fff;
+  text-decoration:none;
+}
+
+.result-card img{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  object-fit:cover;
+}

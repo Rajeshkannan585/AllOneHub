@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/search.css">
+</head>
+<body>
+<div class="search-container">
+  <input id="query" placeholder="Search users or hashtags">
+  <div id="results"></div>
+</div>
+
+<script type="module">
+import { searchUsers } from "../js/search.js";
+import { handleError } from "../js/error-handler.js";
+
+query.addEventListener("input", async () => {
+  if(query.value.trim().length < 2){
+    results.innerHTML = "";
+    return;
+  }
+
+  try{
+    const users = await searchUsers(query.value);
+
+    results.innerHTML = users.map(user => `
+      <a class="result-card" href="profile.html?id=${user.id}">
+        <img src="${user.photoURL || '../assets/images/default-avatar.png'}">
+        <div>
+          <h3>${user.username || 'User'}</h3>
+          <p>${user.bio || ''}</p>
+        </div>
+      </a>
+    `).join("");
+  }catch(error){
+    handleError(error);
+  }
+});
+</script>
+</body>
+</html>

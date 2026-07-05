@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html><body>
+<h1>Admin Dashboard</h1>
+<ul id="reports"></ul>
+
+<script type="module">
+import { getReports } from "../js/admin.js";
+
+const data = await getReports();
+reports.innerHTML = data.map(r => `<li>${r.reason || "Report"}</li>`).join("");
+</script>
+</body></html>

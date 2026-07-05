@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/chat.css">
+</head>
+<body>
+<div class="chat-container">
+  <div id="messages" class="messages"></div>
+  <p id="typing"></p>
+  <div class="composer">
+    <input id="message" placeholder="Type a message">
+    <button id="send">Send</button>
+  </div>
+</div>
+
+<script type="module">
+import { subscribeMessages, sendMessage } from "../js/chat.js";
+import { setTyping } from "../js/typing.js";
+import { requireAuth } from "../js/guards.js";
+
+requireAuth();
+
+const chatId = "global";
+
+subscribeMessages(chatId, (messages) => {
+  document.getElementById("messages").innerHTML =
+    messages.map(m => `<div class="message">${m.text}</div>`).join("");
+});
+
+message.addEventListener("input", () => {
+  setTyping(chatId, message.value.length > 0);
+});
+
+send.onclick = async () => {
+  await sendMessage(chatId, message.value);
+  message.value = "";
+  await setTyping(chatId, false);
+};
+</script>
+</body>
+</html>

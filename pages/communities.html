@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../css/community.css">
+</head>
+<body>
+<div class="container">
+  <h1>Communities</h1>
+
+  <form id="communityForm">
+    <input id="name" placeholder="Community name" required>
+    <textarea id="description" placeholder="Description"></textarea>
+    <button>Create Community</button>
+  </form>
+
+  <div id="communityList"></div>
+</div>
+
+<script type="module">
+import { createCommunity, getMyCommunities }
+from "../js/community.js";
+import { handleError } from "../js/error-handler.js";
+
+async function load() {
+  const items = await getMyCommunities();
+
+  communityList.innerHTML = items.map(c => `
+    <div class="community-card">
+      <h3>${c.name}</h3>
+      <p>${c.description || ""}</p>
+      <small>${c.membersCount || 0} members</small>
+    </div>
+  `).join("");
+}
+
+communityForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+    await createCommunity({
+      name: name.value,
+      description: description.value
+    });
+
+    communityForm.reset();
+    load();
+  } catch (error) {
+    handleError(error);
+  }
+});
+
+load();
+</script>
+</body>
+</html>

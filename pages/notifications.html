@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/notifications.css">
+</head>
+<body>
+<h1>Notifications</h1>
+<ul id="list"></ul>
+
+<script type="module">
+import { subscribeNotifications, markAsRead }
+from "../js/notifications.js";
+
+subscribeNotifications(data => {
+  list.innerHTML = data.map(n => `
+    <li class="${n.isRead ? "read" : "unread"}"
+        data-id="${n.id}">
+      <strong>${n.type}</strong>
+    </li>
+  `).join("");
+
+  document.querySelectorAll("li").forEach(item => {
+    item.onclick = () => markAsRead(item.dataset.id);
+  });
+});
+</script>
+</body>
+</html>

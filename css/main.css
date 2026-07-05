@@ -1,0 +1,24 @@
+:root{
+  --primary:#00C6FF;
+  --accent:#C000FF;
+  --bg:#050B2E;
+}
+body{
+  background:var(--bg);
+  color:white;
+  font-family:Arial,sans-serif;
+  margin:0;
+  padding:20px;
+}
+button{
+  background:linear-gradient(45deg,var(--primary),var(--accent));
+  color:#fff;
+  border:none;
+  padding:10px 16px;
+  border-radius:10px;
+}
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+}

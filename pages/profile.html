@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+<div class="profile-header">
+  <img id="avatar" class="avatar" src="../assets/images/default-avatar.png">
+  <h1 id="username">Loading...</h1>
+  <p id="bio"></p>
+  <div class="stats">
+    <span id="followers">0 Followers</span>
+    <span id="following">0 Following</span>
+  </div>
+  <button id="editBtn">Edit Profile</button>
+</div>
+
+<script type="module">
+import { getProfile } from "../js/profile.js";
+import { requireAuth } from "../js/guards.js";
+
+requireAuth();
+
+const profile = await getProfile();
+
+if(profile){
+  username.textContent = profile.username || "User";
+  bio.textContent = profile.bio || "";
+  avatar.src = profile.photoURL || avatar.src;
+}
+editBtn.onclick = () => location.href = "edit-profile.html";
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+body{
+  background:#0f172a;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  padding:24px;
+}
+
+.settings-container{
+  max-width:640px;
+  margin:auto;
+}
+
+label,select,input,button{
+  display:block;
+  width:100%;
+  margin:14px 0;
+}
+
+input,select,button{
+  padding:12px;
+  border-radius:12px;
+}
+
+button{
+  border:none;
+  background:#2563eb;
+  color:#fff;
+}
+
+.danger{
+  background:#dc2626;
+}
